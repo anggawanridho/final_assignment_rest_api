@@ -8,12 +8,16 @@ const allowedRoles = ["admin", "superuser"];
 router.use(loggingMiddleware);
 
 router.get("/book", bookController.getAllBook);
-router.post("/book", roleMiddleware("admin"), bookController.addBook);
+router.post("/book", roleMiddleware(allowedRoles), bookController.addBook);
 router.get("/book/:isbn", bookController.getBookById);
-router.put("/book/:isbn", roleMiddleware("admin"), bookController.updateBook);
+router.put(
+  "/book/:isbn",
+  roleMiddleware(allowedRoles),
+  bookController.updateBook
+);
 router.delete(
   "/book/:isbn",
-  roleMiddleware("admin"),
+  roleMiddleware(allowedRoles),
   bookController.deleteBook
 );
 

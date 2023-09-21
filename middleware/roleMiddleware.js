@@ -16,7 +16,7 @@ function roleMiddleware(requiredRole) {
         });
       }
 
-      if (decoded.role !== requiredRole) {
+      if (!requiredRole.includes(decoded.role)) {
         return res.status(401).json({
           message: "Authentication Failed, role not valid",
         });
